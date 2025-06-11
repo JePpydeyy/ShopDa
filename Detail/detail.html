@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vòng Garnet Lưu Đỏ - Tình Lam</title>
+  <link rel="stylesheet" href="Detail.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="nameProduct">VÒNG GARNET LƯU ĐỎ</h1>
+    </div>
+    <div class="content">
+      <div class="left-column">
+        <button class="nav-btn prev-btn"><</button>
+        <img src="https://tinhlamjw.com/wp-content/uploads/2025/02/GARNET-LUU-DO-CHARM-PHUC.png" alt="Main Image" class="main-image">
+        <button class="nav-btn next-btn">></button>
+        <div class="thumbnail-gallery">
+          <img src="https://tinhlamjw.com/wp-content/uploads/2025/02/GARNET-LUU-DO-CHARM-PHUC.png" alt="Thumbnail 1" class="thumbnail">
+          <img src="https://tinhlamjw.com/wp-content/uploads/2024/01/DO-SIZE-TAY.jpg" alt="Thumbnail 2" class="thumbnail">
+          <img src="https://tinhlamjw.com/wp-content/uploads/2024/01/BAO-QUAN.jpg" alt="Thumbnail 3" class="thumbnail">
+          <img src="https://tinhlamjw.com/wp-content/uploads/2024/01/NIEN-MENH.jpg" alt="Thumbnail 4" class="thumbnail">
+          <img src="https://tinhlamjw.com/wp-content/uploads/2023/10/dung-2.jpeg" alt="Thumbnail 5" class="thumbnail">
+        </div>
+      </div>
+      <div class="right-column">
+        <p><strong>Mã sản phẩm: TL00192-KIMPHUC</strong></p>
+        <span class="sale"><strong>Trạng thái:</strong> SALE</span>
+        <p><strong>NỘI DUNG SẢN PHẨM:</strong></p>
+        <p>Đá Garnet hay Granat là 1 loại đá quý có lịch sử lâu đời trong khoáng sản học, thường được biết đến với cái tên Ngọc hồng lựu bởi màu đỏ của nó giống như quả lựu. Có khoảng 20 loại khác nhau như: Almandine, Rhodolite, Spessartine, Hessonite, Tsavorite, Demantoid,…mà ở Việt Nam người ta hay gọi dân dã là đá Garnet đỏ, Garnet nâu, Garnet xanh, Garnet vàng, Garnet đen hay Garnet sao. Khi gọi đá Garnet chung chung hay Ngọc hồng lựu, ý mọi người nói đến đá Garnet đỏ (đỏ sậm) – loại đá phổ biến nhất.</p>
+        <p><strong>MẠNG PHÙ HỢP: HỎA - THỔ</strong></p>
+        <hr>
+        <div class="options">
+          <label>Chọn Charm và Size viên đá để thể hiện giá sản phẩm</label>
+          <p><strong>4,010,000 VND</strong></p>
+          <select id="charm">
+            <option>Charm</option>
+            <option>Charm 1</option>
+            <option>Charm 2</option>
+          </select>
+          <select id="size">
+            <option>Size Viên Đá</option>
+            <option>Size 1</option>
+            <option>Size 2</option>
+          </select>
+          <div class="wrist-size">
+            <label>KÍCH THƯỚC CỔ TAY</label>
+            <button onclick="decreaseWristSize()">-</button>
+            <span id="wrist-size">15</span> cm
+            <button onclick="increaseWristSize()">+</button>
+          </div>
+          <p><a href="#">Xem cách đo cổ tay</a></p>
+        </div>
+        <div class="quantity">
+          <label>SỐ LƯỢNG</label>
+          <button onclick="decreaseQuantity()">-</button>
+          <span id="quantity">1</span>
+          <button onclick="increaseQuantity()">+</button>
+        </div>
+        <button class="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
+      </div>
+    </div>
+  </div>
+  <div class="contact">
+    LIÊN HỆ HOTLINE: 1900 29 29 17
+  </div>
+
+  <script>
+    let quantity = 1;
+    let wristSize = 15; // Giá trị mặc định cho kích thước cổ tay
+    let currentImageIndex = 0;
+    const images = [
+      "https://tinhlamjw.com/wp-content/uploads/2025/02/GARNET-LUU-DO-CHARM-PHUC.png",
+      "https://tinhlamjw.com/wp-content/uploads/2024/01/DO-SIZE-TAY.jpg",
+      "https://tinhlamjw.com/wp-content/uploads/2024/01/BAO-QUAN.jpg",
+      "https://tinhlamjw.com/wp-content/uploads/2024/01/NIEN-MENH.jpg",
+      "https://tinhlamjw.com/wp-content/uploads/2023/10/dung-2.jpeg"
+    ];
+
+    function updateQuantity() {
+      document.getElementById('quantity').textContent = quantity;
+    }
+
+    function increaseQuantity() {
+      quantity++;
+      updateQuantity();
+    }
+
+    function decreaseQuantity() {
+      if (quantity > 1) {
+        quantity--;
+        updateQuantity();
+      }
+    }
+
+    function updateWristSize() {
+      document.getElementById('wrist-size').textContent = wristSize;
+    }
+
+    function increaseWristSize() {
+      wristSize++;
+      updateWristSize();
+    }
+
+    function decreaseWristSize() {
+      if (wristSize > 1) {
+        wristSize--;
+        updateWristSize();
+      }
+    }
+
+    function updateImage() {
+      document.querySelector('.main-image').src = images[currentImageIndex];
+    }
+
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      updateImage();
+    }
+
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      updateImage();
+    }
+
+    document.querySelector('.next-btn').addEventListener('click', nextImage);
+    document.querySelector('.prev-btn').addEventListener('click', prevImage);
+
+    document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+      thumb.addEventListener('click', () => {
+        currentImageIndex = index;
+        updateImage();
+      });
+    });
+  </script>
+</body>
+</html>

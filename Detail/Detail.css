@@ -1,0 +1,189 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0c14b;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.header .nameProduct {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+}
+
+.left-column {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: opacity 1.5s ease; 
+}
+
+.nav-btn {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.prev-btn {
+  left: 8px;
+}
+
+.next-btn {
+  right: 8px;
+}
+
+.thumbnail-gallery {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.sale{
+  color: #9b6013;
+}
+.sale strong{
+  color: black;
+}
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.right-column {
+  flex: 2;
+}
+
+.right-column p {
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.options {
+  margin: 20px 0;
+}
+
+.options label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.options select, .options input[type="number"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+} 
+.options p a {
+  color: #9b6013;
+  text-decoration: none;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.quantity button {
+  padding: 5px 10px;
+  width: 30px;
+  height: 25px;
+  background-color: #9b6013;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.wrist-size {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.wrist-size label {
+  font-weight: bold;
+  margin-right: 10px; 
+  white-space: nowrap;
+}
+
+.wrist-size button {
+  padding: 5px 10px;
+  background-color: #9b6013;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 30px;
+  height: 25px; 
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.wrist-size span#wrist-size {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 5px; 
+}
+
+.add-to-cart {
+  background-color: #9b6013;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.contact {
+  background-color: #d3a5a5;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
