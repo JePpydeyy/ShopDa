@@ -770,7 +770,7 @@
 /* Giá trị hiển thị dưới thanh trượt */
 .price-values {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 0px;
     color: #8B6F47;
     font-size: 14px;
     font-family: 'Nunito Sans', Arial, sans-serif;
