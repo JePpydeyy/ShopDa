@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Categories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+}
+
+.news-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.news-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+}
+
+.news-post {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    position: relative;
+    background-color: transparent;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.post-image {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    background-size: contain, contain, cover;
+    background-position: bottom left, top right, center;
+}
+
+.post-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.post-content {
+    position: relative;
+    top: -40px;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    padding: 1.25rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    z-index: 10;
+}
+
+.post-content p {
+    display: flex;
+    align-items: center;
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 0.625rem;
+}
+
+.post-content p i {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
+    color: #6b7280;
+}
+
+.post-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.9375rem;
+    line-height: 1.3;
+}
+
+.post-content .post-link {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: end;
+}
+
+.post-content .post-link a {
+    color: #1f2937;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding-bottom: 2px;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+.post-content .post-link a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    height: 2px;
+    background-color: #1f2937;
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.post-content .post-link a:hover {
+    color: #2C7DA0;
+}
+
+.post-content .post-link a:hover::after {
+    width: 100%;
+    background-color: #2C7DA0;
+}
+
+/* Category Navigation */
+.category-menu {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    position: sticky;
+    top: 2rem;
+    align-self: flex-start;
+}
+
+.category-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    letter-spacing: -0.025em;
+}
+
+.category-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.category-list li {
+    width: 100%;
+}
+
+.category-item {
+    display: block;
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #374151;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.category-item:hover {
+    background-color: #eff6ff;
+    color: #2C7DA0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.category-item.active {
+    background-color: #2C7DA0;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Pagination styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+    gap: 0.75rem;
+}
+
+.pagination-item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination-item:not(.active) {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.pagination-item:not(.active):hover {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+.pagination-item.active {
+    background-color: #2C7DA0;
+    color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .news-container {
+        padding: 0.5rem;
+    }
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .news-post {
+        max-width: 100%;
+    }
+    .post-content {
+        width: calc(100% - 20px);
+        padding: 0.9375rem;
+    }
+    .post-content h3 {
+        font-size: 1.25rem;
+    }
+    .pagination {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        padding: 0 0.5rem;
+    }
+    .pagination-item {
+        width: 36px;
+        height: 36px;
+        font-size: 0.875rem;
+        min-width: 36px;
+    }
+    .category-menu {
+        max-width: 100%;
+        padding: 1rem;
+        position: relative;
+        top: 0;
+    }
+    .category-title {
+        font-size: 1.5rem;
+    }
+    .category-item {
+        font-size: 1rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 1024px) {
+    .news-layout {
+        flex-direction: row;
+    }
+    .news-container {
+        padding: 2rem;
+    }
+    .news-section {
+        flex: 1;
+    }
+    .category-menu {
+        width: 280px;
+        min-width: 250px;
+    }
+    .news-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    .news-post {
+        min-width: 340px;
+    }
+}
+    </style>
+</head>
+<body>
+    <main class="news-container news-layout">
+        <!-- Category Navigation -->
+        <nav class="category-menu">
+            <h1 class="category-title">Bài viết</h1>
+            <ul class="category-list">
+                <li>
+                    <a href="phong-thuy.html" class="category-item">Phong Thủy</a>
+                </li>
+                <li>
+                    <a href="thong-tin-da.html" class="category-item">Thông Tin Đá</a>
+                </li>
+                <li>
+                    <a href="tin-khuyen-mai.html" class="category-item">Tin Khuyến Mãi</a>
+                </li>
+                <li>
+                    <a href="giai-tri.html" class="category-item">Giải Trí</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="news-section">
+            <div class="news-grid">
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img1.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Năm 23, 2025</p>
+                        <h3>CÁC VÒNG ĐÁ CHO NĂM NĂNG LƯỢNG SỐ 9</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-post">
+                    <div class="post-image">
+                        <img src="img2.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <p><i class="fa-regular fa-calendar-days"></i> Tháng Hai 7, 2025</p>
+                        <h3>CHỌN VÒNG ĐÁ PHONG THỦY ĐÚNG CÁCH</h3>
+                        <div class="post-link">
+                            <a href="newdetail.html">XEM THÊM</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination Section -->
+            <div class="pagination">
+                <a href="#" class="pagination-item"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="#" class="pagination-item active">1</a>
+                <a href="#" class="pagination-item">2</a>
+                <a href="#" class="pagination-item">3</a>
+                <a href="#" class="pagination-item"><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
