@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đặt Hàng - Vòng Garnet Lưu Đỏ</title>
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">TL</div>
+                <div>
+                    <div class="logo-text">TINH LÂM</div>
+                    <div class="logo-subtitle">TRANG SỨC PHONG THỦY</div>
+                </div>
+            </a>
+            <div class="header-right">
+                <div class="search-cart">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="cart-container">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="cart-badge">0</span>
+                    </div>
+                </div>
+                <div class="language-selector">
+                    <span>Tiếng Việt</span>
+                   <i class="fa-solid fa-caret-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+  <div class="container">
+    <h1>Đặt Hàng</h1>
+    <div class="form-container">
+      <div class="customer-info">
+        <h2>THÔNG TIN KHÁCH HÀNG</h2>
+        <p class="error">Mời bạn nhập đầy đủ thông tin.</p>
+        <div class="form-group">
+          <label for="full-name">Họ và tên *</label>
+          <input type="text" id="full-name" placeholder="Họ tên của bạn">
+        </div>
+        <div class="form-group">
+          <label for="birth-date">Ngày sinh *</label>
+          <div class="date-picker">
+            <input type="text" id="selected-date" placeholder="Chọn ngày sinh" readonly>
+            <button class="calendar-btn" onclick="toggleCalendar()">📅</button>
+            <div id="calendar-popup" class="calendar-popup">
+              <div class="calendar-header">
+                <select id="month-select">
+                  <option value="0">Tháng 1</option>
+                  <option value="1">Tháng 2</option>
+                  <option value="2">Tháng 3</option>
+                  <option value="3">Tháng 4</option>
+                  <option value="4">Tháng 5</option>
+                  <option value="5">Tháng 6</option>
+                  <option value="6">Tháng 7</option>
+                  <option value="7">Tháng 8</option>
+                  <option value="8">Tháng 9</option>
+                  <option value="9">Tháng 10</option>
+                  <option value="10">Tháng 11</option>
+                  <option value="11">Tháng 12</option>
+                </select>
+                <select id="year-select"></select>
+                <button onclick="setToday()">Hôm nay</button>
+                <button onclick="closeCalendar()">Đóng</button>
+              </div>
+              <div class="calendar-days">
+                <div>H</div><div>B</div><div>T</div><div>N</div><div>S</div><div>B</div><div>C</div>
+              </div>
+              <div id="calendar-dates" class="calendar-dates"></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group merge-forms">
+            <div class="sdt">
+                <label for="phone">Số điện thoại *</label>
+                <input type="tel" id="phone" placeholder="Số điện thoại của bạn">
+            </div>
+          <div class="email">
+          <label for="email">Email *</label>
+          <input type="email" id="email" placeholder="Email của bạn">
+          </div>
+        </div>
+        <div class="form-group merge-forms">
+            <div class="country">
+            <label for="country">Quốc gia *</label>
+          <select id="country">
+            <option value="vietnam">Việt Nam</option>
+          </select>
+            </div>
+            <div class="province">
+            <label for="province">Tỉnh/Thành phố *</label>
+          <select id="province">
+            <option value="hanoi">Hà Nội</option>
+            <option value="hcm">TP. Hồ Chí Minh</option>
+          </select>
+            </div>
+
+          
+        </div>
+        <div class="form-group">
+          
+        </div>
+        <div class="form-group merge-forms">
+            <div class="district-ward">
+            <label for="district">Quận/Huyện *</label>
+          <select id="district">
+            <option value="quan1">Quận 1</option>
+            <option value="quan2">Quận 2</option>
+          </select>
+            </div>
+
+            <div class="ward">
+            <label for="ward">Xã/Phường *</label>
+          <select id="ward">
+            <option value="phuong1">Phường 1</option>
+            <option value="phuong2">Phường 2</option>
+          </select>
+            </div>
+
+          
+        </div>
+        <div class="form-group">
+          <label for="address-detail">Địa chỉ *</label>
+          <input type="text" id="address-detail" placeholder="Ví dụ: Số 20, ngõ 90">
+        </div>
+        <div class="form-group">
+          <label for="note">Ghi chú đặt hàng</label>
+          <textarea id="note" placeholder="Ghi chú cho đơn hàng của bạn"></textarea>
+        </div>
+      </div>
+      <div class="order-info">
+        <h2>THÔNG TIN ĐƠN HÀNG</h2>
+        <div class="order">
+        <div class="order-item">
+          <p style="color: black;"> Sản phẩm</p>
+          <p style="color: black;" >Tổng tiền</p>
+        </div>
+        <div class="order-item">
+          <p>Vòng GARNET LƯU ĐỎ x 3</p>
+          <p>6,510,000 VND</p>
+        </div>
+        <div class="order-item">
+          <p>Chất: Kim Long Bọc Vàng</p>
+          <p></p>
+        </div>
+        <div class="order-item">
+          <p>Size Viên Đá: 8 Li (Size tay từ 13cm -> dưới 16cm)</p>
+          <p>6,510,000 VND</p>
+        </div>
+        <div class="order-item">
+          <p>Size Tay: 12 cm</p>
+          <p></p>
+        </div>
+        <div class="order-item total">
+          <p>Thành tiền</p>
+          <p>6,510,000 VND</p>
+        </div>
+        <div class="order-item">
+          <p>Giáo Hàng</p>
+          <p>Miễn phí vận chuyển</p>
+        </div>
+        <div class="order-item total">
+          <p>Tổng tiền</p>
+          <p>6,510,000 VND</p>
+        </div>
+        </div>
+        <div class="order-btn">
+        <button>ĐẶT HÀNG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+ // Tạo và quản lý lịch
+let currentDate = new Date();
+let selectedDate = null;
+
+function populateYearSelect() {
+  const yearSelect = document.getElementById('year-select');
+  const currentYear = new Date().getFullYear();
+  for (let i = currentYear; i >= 1900; i--) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = i;
+    yearSelect.appendChild(option);
+  }
+  yearSelect.value = currentYear;
+}
+
+function renderCalendar() {
+  const monthSelect = document.getElementById('month-select');
+  const yearSelect = document.getElementById('year-select');
+  const calendarDates = document.getElementById('calendar-dates');
+  calendarDates.innerHTML = '';
+
+  const year = parseInt(yearSelect.value);
+  const month = parseInt(monthSelect.value); // Giá trị tháng từ 0-11
+  const firstDay = new Date(year, month, 1); // Sử dụng month trực tiếp
+  const lastDay = new Date(year, month + 1, 0); // Lấy ngày cuối tháng
+  const daysInMonth = lastDay.getDate();
+  const startingDay = firstDay.getDay();
+
+  for (let i = 0; i < startingDay; i++) {
+    const emptyDiv = document.createElement('div');
+    calendarDates.appendChild(emptyDiv);
+  }
+
+  for (let i = 1; i <= daysInMonth; i++) {
+    const dateDiv = document.createElement('div');
+    dateDiv.textContent = i;
+    if (selectedDate && selectedDate.getFullYear() === year && selectedDate.getMonth() === month && selectedDate.getDate() === i) {
+      dateDiv.classList.add('selected-date');
+    }
+    dateDiv.addEventListener('click', () => {
+      selectedDate = new Date(year, month, i);
+      renderCalendar();
+      updateSelectedDate();
+    });
+    calendarDates.appendChild(dateDiv);
+  }
+}
+
+function updateSelectedDate() {
+  if (selectedDate) {
+    const monthNames = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+    document.getElementById('selected-date').value = `${selectedDate.getDate()} ${monthNames[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
+    closeCalendar();
+  }
+}
+
+function setToday() {
+  selectedDate = new Date();
+  document.getElementById('month-select').value = selectedDate.getMonth();
+  document.getElementById('year-select').value = selectedDate.getFullYear();
+  renderCalendar();
+  updateSelectedDate();
+}
+
+function toggleCalendar() {
+  const calendarPopup = document.getElementById('calendar-popup');
+  calendarPopup.style.display = calendarPopup.style.display === 'block' ? 'none' : 'block';
+  if (calendarPopup.style.display === 'block') {
+    renderCalendar(); // Render lại lịch khi mở popup
+  }
+}
+
+function closeCalendar() {
+  document.getElementById('calendar-popup').style.display = 'none';
+}
+
+// Khởi tạo khi trang tải
+document.addEventListener('DOMContentLoaded', () => {
+  populateYearSelect();
+  document.getElementById('month-select').value = currentDate.getMonth(); // Đặt tháng hiện tại
+  document.getElementById('year-select').value = currentDate.getFullYear();
+  renderCalendar();
+
+  // Đóng lịch khi nhấp ra ngoài
+  document.addEventListener('click', (e) => {
+    const calendarPopup = document.getElementById('calendar-popup');
+    const datePicker = document.querySelector('.date-picker');
+    if (!datePicker.contains(e.target)) {
+      calendarPopup.style.display = 'none';
+    }
+  });
+
+  // Cập nhật lịch khi thay đổi tháng hoặc năm
+  document.getElementById('month-select').addEventListener('change', renderCalendar);
+  document.getElementById('year-select').addEventListener('change', renderCalendar);
+});
+
+// Xử lý checkbox và đặt hàng
+document.querySelector('input[type="checkbox"]').addEventListener('change', function() {
+  const error = document.querySelector('.error');
+  if (this.checked) {
+    error.style.display = 'none';
+  } else {
+    error.style.display = 'block';
+  }
+});
+
+document.querySelector('.order-btn').addEventListener('click', function() {
+  const fullName = document.getElementById('full-name').value;
+  const selectedDateValue = document.getElementById('selected-date').value;
+  const phone = document.getElementById('phone').value;
+  const email = document.getElementById('email').value;
+  const province = document.getElementById('province').value;
+  const district = document.getElementById('district').value;
+  const ward = document.getElementById('ward').value;
+  const addressDetail = document.getElementById('address-detail').value;
+
+  if (!fullName || !selectedDateValue || !phone || !email || !province || !district || !ward || !addressDetail) {
+    document.querySelector('.error').style.display = 'block';
+  } else {
+    alert('Đặt hàng thành công!');
+  }
+});
+  </script>
+</body>
+</html>
